@@ -1,15 +1,14 @@
-# Production overrides — ArgoCD applies these on top of each chart's values.yaml
-# Replace <PUBLIC_IP> with your Oracle VM IP after provisioning
+# Production overrides
 
 postgres:
   auth:
-    password: ""  # set this before deploying: helm upgrade ... --set postgres.auth.password=<secret>
+    password: ""
 
 geocoder:
   image:
     tag: latest  # GitHub Actions updates this field automatically on each push
   ingress:
-    host: "geo.<PUBLIC_IP>.nip.io"
+    host: "geo.34.40.52.167.nip.io"
 
 ml-svc:
   image:
