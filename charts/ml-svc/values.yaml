@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/rsmrtk/geo-mlops-ml
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 5001
+
+env:
+  MLFLOW_TRACKING_URI: "http://mlflow:5000"
+  MODEL_NAME: "location-classifier"
+  MODEL_STAGE: "Production"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi

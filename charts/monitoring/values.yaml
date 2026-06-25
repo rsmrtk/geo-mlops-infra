@@ -1,0 +1,25 @@
+# Values override for prometheus-community/kube-prometheus-stack
+# Deploy with:
+#   helm upgrade --install monitoring prometheus-community/kube-prometheus-stack \
+#     -n monitoring --create-namespace \
+#     -f charts/monitoring/values.yaml
+
+grafana:
+  adminPassword: changeme
+  persistence:
+    enabled: true
+    size: 2Gi
+
+prometheus:
+  prometheusSpec:
+    retention: 7d
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi
+      limits:
+        cpu: 500m
+        memory: 1Gi
+
+alertmanager:
+  enabled: false

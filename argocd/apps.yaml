@@ -1,0 +1,68 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: geocoder
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rsmrtk/geo-mlops-infra
+    targetRevision: HEAD
+    path: charts/geocoder
+    helm:
+      valueFiles:
+        - ../../envs/prod/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: geo-mlops
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ml-svc
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rsmrtk/geo-mlops-infra
+    targetRevision: HEAD
+    path: charts/ml-svc
+    helm:
+      valueFiles:
+        - ../../envs/prod/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: geo-mlops
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mlflow
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rsmrtk/geo-mlops-infra
+    targetRevision: HEAD
+    path: charts/mlflow
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: geo-mlops
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

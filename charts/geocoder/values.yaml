@@ -1,0 +1,25 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/rsmrtk/geo-mlops
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 8080
+
+ingress:
+  enabled: true
+  host: ""  # set per-env, e.g. geo.1.2.3.4.nip.io
+
+env:
+  NOMINATIM_URL: "https://nominatim.openstreetmap.org"
+  ML_SVC_URL: "http://ml-svc:5001"
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
