@@ -8,7 +8,11 @@ service:
 
 persistence:
   size: 5Gi
-  storageClass: ""  # use cluster default
+  storageClass: ""
+
+gcs:
+  bucket: "gs://geo-mlops-artifacts-rsmrtk"
+  secretName: "mlflow-gcs-key"
 
 resources:
   requests:
