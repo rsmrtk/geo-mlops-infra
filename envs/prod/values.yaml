@@ -3,17 +3,14 @@
 postgres:
   auth:
     password: ""
-
 geocoder:
   image:
-    tag: latest  # GitHub Actions updates this field automatically on each push
+    tag: sha-cb61c49 # GitHub Actions updates this field automatically on each push
   ingress:
     host: "geo.34.40.52.167.nip.io"
-
 ml-svc:
   image:
-    tag: latest
-
+    tag: sha-cb61c49
 mlflow:
   persistence:
     size: 5Gi
