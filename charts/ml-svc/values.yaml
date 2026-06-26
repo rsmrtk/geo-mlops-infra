@@ -11,7 +11,7 @@ service:
 env:
   MLFLOW_TRACKING_URI: "http://mlflow:5000"
   MODEL_NAME: "location-classifier"
-  MODEL_STAGE: "Production"
+  MODEL_ALIAS: "champion"
 
 resources:
   requests:
