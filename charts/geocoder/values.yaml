@@ -10,7 +10,7 @@ service:
 
 ingress:
   enabled: true
-  host: ""  # set per-env, e.g. geo.1.2.3.4.nip.io
+  host: ""  # required — set per-env, e.g. geo.<your-cluster-ip>.nip.io (no public IP is committed to this repo)
 
 env:
   NOMINATIM_URL: "https://nominatim.openstreetmap.org"

@@ -2,10 +2,12 @@
 # Deploy with:
 #   helm upgrade --install monitoring prometheus-community/kube-prometheus-stack \
 #     -n monitoring --create-namespace \
-#     -f charts/monitoring/values.yaml
+#     -f charts/monitoring/values.yaml \
+#     --set grafana.adminPassword=<your-password>
+#
+# No default password is committed here on purpose — always pass your own.
 
 grafana:
-  adminPassword: changeme
   persistence:
     enabled: true
     size: 2Gi

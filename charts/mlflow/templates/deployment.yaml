@@ -24,18 +24,26 @@ spec:
             - --host=0.0.0.0
             - --port={{ .Values.service.port }}
             - --backend-store-uri=sqlite:///mlflow/mlflow.db
+            {{- if .Values.gcs.bucket }}
             - --default-artifact-root={{ .Values.gcs.bucket }}
+            {{- else }}
+            - --default-artifact-root=/mlflow/artifacts
+            {{- end }}
           ports:
             - containerPort: {{ .Values.service.port }}
+          {{- if .Values.gcs.bucket }}
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /secrets/gcs/key.json
+          {{- end }}
           volumeMounts:
             - name: mlflow-data
               mountPath: /mlflow
+            {{- if .Values.gcs.bucket }}
             - name: gcs-key
               mountPath: /secrets/gcs
               readOnly: true
+            {{- end }}
           livenessProbe:
             httpGet:
               path: /health
@@ -48,6 +56,8 @@ spec:
         - name: mlflow-data
           persistentVolumeClaim:
             claimName: mlflow-data
+        {{- if .Values.gcs.bucket }}
         - name: gcs-key
           secret:
             secretName: {{ .Values.gcs.secretName }}
+        {{- end }}

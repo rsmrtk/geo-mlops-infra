@@ -1,16 +1,21 @@
 # Production overrides
+#
+# `ingress.host` and `mlflow.gcs.bucket` are environment-specific and must be
+# set per deployment — see README "Deploying to your own cluster".
 
 postgres:
   auth:
-    password: ""
+    password: "" # required — set via `--set postgres.auth.password=...` or a sealed secret, never commit a real value
 geocoder:
   image:
     tag: sha-cb61c49 # GitHub Actions updates this field automatically on each push
   ingress:
-    host: "geo.34.40.52.167.nip.io"
+    host: "" # e.g. geo.<your-cluster-ip>.nip.io — leave empty to disable, see README
 ml-svc:
   image:
     tag: sha-cb61c49
 mlflow:
   persistence:
     size: 5Gi
+  gcs:
+    bucket: "" # e.g. gs://<your-project>-mlflow-artifacts — leave empty to use local artifact storage instead

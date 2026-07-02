@@ -5,7 +5,7 @@ metadata:
   name: {{ .Release.Name }}
 spec:
   rules:
-    - host: {{ .Values.ingress.host | quote }}
+    - host: {{ required "geocoder.ingress.host is required — set it to your cluster's address, e.g. geo.<your-ip>.nip.io" .Values.ingress.host | quote }}
       http:
         paths:
           - path: /

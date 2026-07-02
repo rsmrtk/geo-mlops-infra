@@ -11,8 +11,8 @@ persistence:
   storageClass: ""
 
 gcs:
-  bucket: "gs://geo-mlops-artifacts-rsmrtk"
-  secretName: "mlflow-gcs-key"
+  bucket: "" # e.g. gs://<your-project>-mlflow-artifacts — leave empty to fall back to local artifact storage
+  secretName: "mlflow-gcs-key" # k8s Secret containing a GCS service-account key.json — create it yourself, never commit it
 
 resources:
   requests:
